@@ -1,0 +1,20 @@
+<h2>Movie #<%= @movie[:id] %> Details</h2>
+<a href="/movies">Go Back</a>
+<dl>
+  <dt>Title</dt>
+  <dd><%= @movie[:title] %></dd>
+  <dt>Year</dt>
+  <dd><%= @movie[:year] %></dd>
+  <dt>Duration</dt>
+  <dd><%= @movie[:duration] %></dd>
+  <dt>Description</dt>
+  <dd><%= @movie[:description] %></dd>
+  <dt>Image</dt>
+  <dd><img src="<%= @movie[:image] %>" width="100" /></dd>
+  <dt>Director</dt>
+  <dd><%= Director.where(id: @movie[:director_id]).first.name %></dd>
+  <dt>Created at</dt>
+  <dd><%= @movie[:created_at] %></dd>
+  <dt>Updated at</dt>
+  <dd><%= @movie[:updated_at] %></dd>
+</dl>
