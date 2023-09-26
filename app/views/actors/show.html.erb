@@ -1,0 +1,39 @@
+<h2>Actor #<%= @actor[:id] %> details</h2>
+<a href="javascript:history.back()">Go Back</a>
+
+<dl>
+  <dt>Name</dt>
+  <dd><%= @actor[:name] %></dd>
+  <dt>DOB</dt>
+  <dd><%= @actor[:dob] %></dd>
+  <dt>Bio</dt>
+  <dd><%= @actor[:bio] %></dd>
+  <dt>Image</dt>
+  <dd><img src="<%= @actor[:image] %>" width="100" /></dd>
+  <dt>Created at</dt>
+  <dd><%= @actor[:created_at] %></dd>
+  <dt>Updated at</dt>
+  <dd><%= @actor[:updated_at] %></dd>
+</dl>
+
+<h3>Filmography</h3>
+<table border="1">
+  <tr>
+    <th>Title</th>
+    <th>Year</th>
+    <th>Director</th>
+    <th>Character Name</th>
+    <th></th>
+  </tr>
+  <% Character.where(actor_id: @actor[:id]).each do |character| %>
+    <% movie = Movie.where(id: character[:movie_id]).first %>
+    <% director = Director.where(id: movie[:director_id]).first %>
+    <tr>
+      <td><%= movie[:title] %></td>
+      <td><%= movie[:year] %></td>
+      <td><%= director[:name] %></td>
+      <td><%= character[:name] %></td>
+      <td><a href="/movies/<%= movie[:id] %>">Show details</a></td>
+    </tr>
+  <% end %>
+</table>
